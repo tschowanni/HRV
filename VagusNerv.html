@@ -404,6 +404,228 @@
   .color-orange { color: var(--orange); }
 
   #fileInput { display: none; }
+
+  /* ── HISTORY TABS ── */
+  .hist-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 12px 12px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .hist-tabs::-webkit-scrollbar { display: none; }
+  .htab {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .htab.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+  .htab-page { display: none; }
+  .htab-page.active { display: block; }
+
+  /* ── HISTORY CARDS ── */
+  .hist-card {
+    background: var(--card);
+    margin: 10px 12px 0;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .hist-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  /* ── BAR CHART ── */
+  .chart-legend {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 120px;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .bar-chart::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: calc(75% - 1px);
+    border-top: 1.5px dashed var(--green);
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .bar-chart::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: calc(100% - 1px);
+    border-top: 1.5px dashed var(--orange);
+    opacity: 0.4;
+    z-index: 0;
+  }
+  .bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .bar-fill {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    min-height: 3px;
+    transition: height 0.4s ease;
+  }
+  .bar-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    margin-bottom: 2px;
+    white-space: nowrap;
+  }
+  .bar-chart-labels {
+    display: flex;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .bar-lbl {
+    flex: 1;
+    text-align: center;
+    font-size: 9px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .goal-zone-info {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  /* ── CALENDAR ── */
+  .cal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .cal-nav-btn {
+    background: var(--row-bg);
+    border: none;
+    border-radius: 8px;
+    width: 32px; height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .cal-month-label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .cal-weekdays span {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: default;
+    border: 1.5px solid transparent;
+  }
+  .cal-day.empty { background: transparent; }
+  .cal-day.no-data { background: #EEF1F5; color: var(--muted); border-color: #ddd; }
+  .cal-day.under   { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+  .cal-day.goal    { background: var(--green-light); color: var(--green); border-color: var(--green); }
+  .cal-day.over    { background: var(--orange-light); color: var(--orange); border-color: var(--orange); }
+  .cal-day.today   { font-weight: 700; box-shadow: 0 0 0 2px var(--text); }
+  .cal-day-num { font-size: 13px; line-height: 1; }
+  .cal-day-dur { font-size: 8px; margin-top: 1px; font-family: 'DM Mono', monospace; opacity: 0.8; }
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .cal-leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted); }
+  .cal-leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* ── STATS ── */
+  .month-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .stats-kpi-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stats-kpi {
+    flex: 1;
+    background: var(--row-bg);
+    border-radius: 12px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .stats-kpi-val { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; }
+  .stats-kpi-lbl { font-size: 9px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stats-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .stats-row-item:last-child { border-bottom: none; }
+  .stats-row-lbl { color: var(--muted); font-size: 12px; }
+  .stats-row-val { font-family: 'DM Mono', monospace; font-weight: 500; }
+  .goal-bar-wrap { margin: 10px 0 4px; }
+  .goal-bar-track { background: var(--row-bg); border-radius: 20px; height: 8px; overflow: hidden; }
+  .goal-bar-fill { height: 100%; border-radius: 20px; transition: width 0.5s ease; }
 </style>
 </head>
 <body>
@@ -499,10 +721,83 @@
 <!-- PAGE: VERLAUF -->
 <!-- ════════════════════════════════════════ -->
 <div class="page" id="page-history">
-  <div style="padding:14px 12px 6px">
-    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Therapie-Verlauf</div>
+
+  <!-- Sub-Tabs -->
+  <div class="hist-tabs">
+    <button class="htab active" onclick="switchHistTab('chart',this)">📈 Diagramm</button>
+    <button class="htab" onclick="switchHistTab('calendar',this)">📅 Kalender</button>
+    <button class="htab" onclick="switchHistTab('stats',this)">📊 Statistik</button>
+    <button class="htab" onclick="switchHistTab('log',this)">📋 Verlauf</button>
   </div>
-  <div id="historyList"></div>
+
+  <!-- TAB: CHART -->
+  <div class="htab-page active" id="htab-chart">
+    <div class="hist-card">
+      <div class="hist-card-title">Therapiestunden pro Tag</div>
+      <div class="chart-legend">
+        <span class="leg-item"><span class="leg-dot" style="background:var(--blue)"></span>Unter Ziel</span>
+        <span class="leg-item"><span class="leg-dot" style="background:var(--green)"></span>Ziel erreicht</span>
+        <span class="leg-item"><span class="leg-dot" style="background:var(--orange)"></span>Überschritten</span>
+      </div>
+      <div class="bar-chart" id="barChart"></div>
+      <div class="bar-chart-labels" id="barChartLabels"></div>
+      <!-- Zielzone annotation -->
+      <div class="goal-zone-info">
+        <span style="color:var(--green);font-weight:600">●</span> Zielzone: 3–4 Stunden
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: CALENDAR -->
+  <div class="htab-page" id="htab-calendar">
+    <div class="hist-card">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="calPrev()">‹</button>
+        <span class="cal-month-label" id="calMonthLabel"></span>
+        <button class="cal-nav-btn" onclick="calNext()">›</button>
+      </div>
+      <div class="cal-weekdays">
+        <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend">
+        <span class="cal-leg-item"><span class="cal-leg-dot" style="background:#EEF1F5;border:1px solid #ddd"></span>Kein Eintrag</span>
+        <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--blue-light);border:1px solid var(--blue)"></span>Unter Ziel</span>
+        <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--green-light);border:1px solid var(--green)"></span>Ziel erreicht</span>
+        <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--orange-light);border:1px solid var(--orange)"></span>Überschritten</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: STATISTIK -->
+  <div class="htab-page" id="htab-stats">
+    <!-- Monatsstatistik -->
+    <div class="hist-card" id="monthStatsCard">
+      <div class="hist-card-title">Monatsstatistik</div>
+      <div class="month-selector">
+        <button class="cal-nav-btn" onclick="statsPrevMonth()">‹</button>
+        <span class="cal-month-label" id="statsMonthLabel"></span>
+        <button class="cal-nav-btn" onclick="statsNextMonth()">›</button>
+      </div>
+      <div id="monthStatsContent"></div>
+    </div>
+    <!-- Wochenstatistik -->
+    <div class="hist-card">
+      <div class="hist-card-title">Letzte 7 Tage</div>
+      <div id="weekStatsContent"></div>
+    </div>
+    <!-- Gesamtstatistik -->
+    <div class="hist-card">
+      <div class="hist-card-title">Gesamtstatistik</div>
+      <div id="allStatsContent"></div>
+    </div>
+  </div>
+
+  <!-- TAB: VERLAUF LOG -->
+  <div class="htab-page" id="htab-log">
+    <div id="historyList"></div>
+  </div>
+
 </div>
 
 <!-- ════════════════════════════════════════ -->
@@ -861,9 +1156,344 @@ function timeToMinutes(timeStr) {
 }
 
 // ══════════════════════════════════════════════
-//  HISTORY PAGE
+//  HISTORY PAGE STATE
 // ══════════════════════════════════════════════
-function renderHistory() {
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+let statsYear = new Date().getFullYear();
+let statsMonth = new Date().getMonth();
+
+function switchHistTab(name, btn) {
+  document.querySelectorAll('.htab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.htab-page').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('htab-' + name).classList.add('active');
+  if (name === 'chart')    renderBarChart();
+  if (name === 'calendar') renderCalendar();
+  if (name === 'stats')    renderStats();
+  if (name === 'log')      renderHistoryLog();
+}
+
+// ══════════════════════════════════════════════
+//  BAR CHART (last 14 days)
+// ══════════════════════════════════════════════
+function renderBarChart() {
+  const db = loadData();
+  const chart = document.getElementById('barChart');
+  const labels = document.getElementById('barChartLabels');
+  chart.innerHTML = '';
+  labels.innerHTML = '';
+
+  // Build last 14 days
+  const days = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+    const sessions = db[key] || [];
+    const totalMin = sessions.reduce((s, x) => s + x.duration, 0);
+    days.push({ key, totalMin, d });
+  }
+
+  const maxMin = Math.max(...days.map(d => d.totalMin), GOAL_MAX_MIN);
+
+  days.forEach(({ totalMin, d }) => {
+    const pctHeight = totalMin > 0 ? Math.max((totalMin / maxMin) * 100, 3) : 0;
+    let color = 'var(--blue)';
+    if (totalMin >= GOAL_MAX_MIN) color = 'var(--orange)';
+    else if (totalMin >= GOAL_MIN_MIN) color = 'var(--green)';
+
+    const h = Math.floor(totalMin/60), m = totalMin%60;
+    const valStr = totalMin > 0 ? `${h}:${String(m).padStart(2,'0')}` : '';
+
+    const col = document.createElement('div');
+    col.className = 'bar-col';
+    col.innerHTML = `
+      <div class="bar-val">${valStr}</div>
+      <div class="bar-fill" style="height:${pctHeight}%;background:${color};"></div>
+    `;
+    chart.appendChild(col);
+
+    const lbl = document.createElement('div');
+    lbl.className = 'bar-lbl';
+    const dayNames = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+    lbl.textContent = dayNames[d.getDay()];
+    labels.appendChild(lbl);
+  });
+}
+
+// ══════════════════════════════════════════════
+//  CALENDAR
+// ══════════════════════════════════════════════
+function renderCalendar() {
+  const db = loadData();
+  const label = document.getElementById('calMonthLabel');
+  const grid = document.getElementById('calGrid');
+
+  const monthNames = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  label.textContent = `${monthNames[calMonth]} ${calYear}`;
+  grid.innerHTML = '';
+
+  const today = new Date();
+  const firstDay = new Date(calYear, calMonth, 1);
+  // Monday-first: 0=Mon, 6=Sun
+  let startDow = firstDay.getDay() - 1;
+  if (startDow < 0) startDow = 6;
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  // Empty cells
+  for (let i = 0; i < startDow; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    grid.appendChild(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const key = `${calYear}.${String(calMonth+1).padStart(2,'0')}.${String(day).padStart(2,'0')}`;
+    const sessions = db[key] || [];
+    const totalMin = sessions.reduce((s, x) => s + x.duration, 0);
+
+    let cls = 'cal-day';
+    if (sessions.length === 0) cls += ' no-data';
+    else if (totalMin >= GOAL_MAX_MIN) cls += ' over';
+    else if (totalMin >= GOAL_MIN_MIN) cls += ' goal';
+    else cls += ' under';
+
+    const isToday = day === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+    if (isToday) cls += ' today';
+
+    const durStr = totalMin > 0 ? `${Math.floor(totalMin/60)}:${String(totalMin%60).padStart(2,'0')}h` : '';
+
+    const cell = document.createElement('div');
+    cell.className = cls;
+    cell.innerHTML = `<span class="cal-day-num">${day}</span>${durStr ? `<span class="cal-day-dur">${durStr}</span>` : ''}`;
+    grid.appendChild(cell);
+  }
+}
+
+function calPrev() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+function calNext() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+// ══════════════════════════════════════════════
+//  STATISTICS
+// ══════════════════════════════════════════════
+function renderStats() {
+  renderMonthStats();
+  renderWeekStats();
+  renderAllStats();
+}
+
+function statsPrevMonth() {
+  statsMonth--;
+  if (statsMonth < 0) { statsMonth = 11; statsYear--; }
+  renderMonthStats();
+}
+function statsNextMonth() {
+  statsMonth++;
+  if (statsMonth > 11) { statsMonth = 0; statsYear++; }
+  renderMonthStats();
+}
+
+function renderMonthStats() {
+  const db = loadData();
+  const monthNames = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  document.getElementById('statsMonthLabel').textContent = `${monthNames[statsMonth]} ${statsYear}`;
+
+  const daysInMonth = new Date(statsYear, statsMonth + 1, 0).getDate();
+  let totalMin = 0, totalSess = 0, activeDays = 0, goalDays = 0, overDays = 0;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${statsYear}.${String(statsMonth+1).padStart(2,'0')}.${String(d).padStart(2,'0')}`;
+    const sessions = db[key] || [];
+    if (sessions.length > 0) {
+      activeDays++;
+      const dayMin = sessions.reduce((s, x) => s + x.duration, 0);
+      totalMin += dayMin;
+      totalSess += sessions.length;
+      if (dayMin >= GOAL_MAX_MIN) overDays++;
+      else if (dayMin >= GOAL_MIN_MIN) goalDays++;
+    }
+  }
+
+  const avgMinPerDay = activeDays > 0 ? Math.round(totalMin / activeDays) : 0;
+  const avgH = Math.floor(avgMinPerDay/60), avgM = avgMinPerDay%60;
+  const totalH = Math.floor(totalMin/60), totalM = totalMin%60;
+  const goalPct = activeDays > 0 ? Math.round((goalDays + overDays) / activeDays * 100) : 0;
+  let goalColor = goalPct >= 70 ? 'var(--green)' : goalPct >= 40 ? 'var(--blue)' : 'var(--orange)';
+
+  document.getElementById('monthStatsContent').innerHTML = `
+    <div class="stats-kpi-row">
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--blue)">${activeDays}</div>
+        <div class="stats-kpi-lbl">Aktive Tage</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--text)">${totalSess}</div>
+        <div class="stats-kpi-lbl">Sessions</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--text)">${totalH}:${String(totalM).padStart(2,'0')}h</div>
+        <div class="stats-kpi-lbl">Gesamt</div>
+      </div>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Ø Therapiezeit / Aktivtag</span>
+      <span class="stats-row-val">${avgH}:${String(avgM).padStart(2,'0')} h</span>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Ziel erreicht (3–4h)</span>
+      <span class="stats-row-val" style="color:var(--green)">${goalDays} Tage</span>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Ziel überschritten (>4h)</span>
+      <span class="stats-row-val" style="color:var(--orange)">${overDays} Tage</span>
+    </div>
+    <div class="stats-row-item" style="border:none;padding-bottom:0">
+      <span class="stats-row-lbl">Ziel-Erfolgsquote</span>
+      <span class="stats-row-val" style="color:${goalColor}">${goalPct}%</span>
+    </div>
+    <div class="goal-bar-wrap">
+      <div class="goal-bar-track">
+        <div class="goal-bar-fill" style="width:${goalPct}%;background:${goalColor}"></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderWeekStats() {
+  const db = loadData();
+  let totalMin = 0, totalSess = 0, activeDays = 0, goalDays = 0;
+  const dayNames = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+
+  let rows = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+    const sessions = db[key] || [];
+    const dayMin = sessions.reduce((s, x) => s + x.duration, 0);
+    if (sessions.length > 0) { activeDays++; totalSess += sessions.length; }
+    totalMin += dayMin;
+    if (dayMin >= GOAL_MIN_MIN) goalDays++;
+
+    let statusDot = '⬜';
+    if (dayMin >= GOAL_MAX_MIN) statusDot = '🟠';
+    else if (dayMin >= GOAL_MIN_MIN) statusDot = '🟢';
+    else if (dayMin > 0) statusDot = '🔵';
+
+    const h = Math.floor(dayMin/60), m = dayMin%60;
+    const durStr = dayMin > 0 ? `${h}:${String(m).padStart(2,'0')} h` : '–';
+    const isToday = i === 0;
+    rows += `<div class="stats-row-item">
+      <span class="stats-row-lbl">${statusDot} ${dayNames[d.getDay()]}, ${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}${isToday ? ' (heute)' : ''}</span>
+      <span class="stats-row-val">${durStr}</span>
+    </div>`;
+  }
+
+  const avgMin = activeDays > 0 ? Math.round(totalMin / 7) : 0;
+  const avgH = Math.floor(avgMin/60), avgM = avgMin%60;
+
+  document.getElementById('weekStatsContent').innerHTML = `
+    <div class="stats-kpi-row">
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--blue)">${activeDays}</div>
+        <div class="stats-kpi-lbl">Aktive Tage</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--green)">${goalDays}</div>
+        <div class="stats-kpi-lbl">Ziel erreicht</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val">${avgH}:${String(avgM).padStart(2,'0')}h</div>
+        <div class="stats-kpi-lbl">Ø / Tag</div>
+      </div>
+    </div>
+    ${rows}
+  `;
+}
+
+function renderAllStats() {
+  const db = loadData();
+  const keys = Object.keys(db).sort();
+  if (keys.length === 0) {
+    document.getElementById('allStatsContent').innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px;font-size:13px">Noch keine Daten vorhanden.</div>';
+    return;
+  }
+
+  let totalMin = 0, totalSess = 0, goalDays = 0, overDays = 0, bestMin = 0, bestKey = '';
+  keys.forEach(k => {
+    const sessions = db[k] || [];
+    const dayMin = sessions.reduce((s, x) => s + x.duration, 0);
+    totalMin += dayMin;
+    totalSess += sessions.length;
+    if (dayMin >= GOAL_MAX_MIN) overDays++;
+    else if (dayMin >= GOAL_MIN_MIN) goalDays++;
+    if (dayMin > bestMin) { bestMin = dayMin; bestKey = k; }
+  });
+
+  const activeDays = keys.length;
+  const avgMin = Math.round(totalMin / activeDays);
+  const avgH = Math.floor(avgMin/60), avgM = avgMin%60;
+  const totalH = Math.floor(totalMin/60), totalM = totalMin%60;
+  const bestH = Math.floor(bestMin/60), bestM = bestMin%60;
+  const goalPct = Math.round((goalDays + overDays) / activeDays * 100);
+  let goalColor = goalPct >= 70 ? 'var(--green)' : goalPct >= 40 ? 'var(--blue)' : 'var(--orange)';
+
+  const firstDate = keys[0].split('.').reverse().join('.');
+  const lastDate = keys[keys.length-1].split('.').reverse().join('.');
+
+  document.getElementById('allStatsContent').innerHTML = `
+    <div class="stats-kpi-row">
+      <div class="stats-kpi">
+        <div class="stats-kpi-val" style="color:var(--blue)">${activeDays}</div>
+        <div class="stats-kpi-lbl">Tage Total</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val">${totalSess}</div>
+        <div class="stats-kpi-lbl">Sessions</div>
+      </div>
+      <div class="stats-kpi">
+        <div class="stats-kpi-val">${totalH}h${totalM > 0 ? totalM+'m' : ''}</div>
+        <div class="stats-kpi-lbl">Gesamt</div>
+      </div>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Zeitraum</span>
+      <span class="stats-row-val" style="font-size:11px">${firstDate} – ${lastDate}</span>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Ø Therapiezeit / Tag</span>
+      <span class="stats-row-val">${avgH}:${String(avgM).padStart(2,'0')} h</span>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Bester Tag</span>
+      <span class="stats-row-val" style="color:var(--green)">${bestH}:${String(bestM).padStart(2,'0')} h</span>
+    </div>
+    <div class="stats-row-item">
+      <span class="stats-row-lbl">Ziel-Erfolgsquote</span>
+      <span class="stats-row-val" style="color:${goalColor}">${goalPct}%</span>
+    </div>
+    <div class="goal-bar-wrap">
+      <div class="goal-bar-track">
+        <div class="goal-bar-fill" style="width:${goalPct}%;background:${goalColor}"></div>
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+//  HISTORY LOG
+// ══════════════════════════════════════════════
+function renderHistoryLog() {
   const db = loadData();
   const list = document.getElementById('historyList');
   list.innerHTML = '';
@@ -879,7 +1509,6 @@ function renderHistory() {
     const totalMin = sessions.reduce((s, x) => s + x.duration, 0);
     const h = Math.floor(totalMin / 60);
     const m = totalMin % 60;
-    const pct = Math.min(100, Math.round(totalMin / GOAL_MIN_MIN * 100));
 
     let timeColor = 'var(--blue)';
     if (totalMin >= GOAL_MAX_MIN) timeColor = 'var(--orange)';
@@ -894,16 +1523,15 @@ function renderHistory() {
     card.innerHTML = `
       <div class="history-day-head">
         <div class="hd-date">${dayName}</div>
-        <div class="hd-time" style="color:${timeColor}">${h}:${String(m).padStart(2,'0')} h · ${pct}%</div>
+        <div class="hd-time" style="color:${timeColor}">${h}:${String(m).padStart(2,'0')} h</div>
       </div>
     `;
 
-    // Mini timeline
     const tlWrap = document.createElement('div');
-    tlWrap.style.cssText = 'padding:10px 14px 6px;';
+    tlWrap.style.cssText = 'padding:8px 14px 6px;';
     const tlTrackId = `hist-tl-${key}`;
     tlWrap.innerHTML = `
-      <div class="timeline-track" id="${tlTrackId}" style="height:20px;margin-bottom:4px;"></div>
+      <div class="timeline-track" id="${tlTrackId}" style="height:18px;margin-bottom:4px;"></div>
       <div class="tl-hours"><span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span></div>
     `;
     card.appendChild(tlWrap);
@@ -915,7 +1543,7 @@ function renderHistory() {
       let dotClass = 's-dot-blue';
       if (cumMin > GOAL_MAX_MIN) dotClass = 's-dot-orange';
       else if (cumMin >= GOAL_MIN_MIN) dotClass = 's-dot-green';
-      row.innerHTML = `<div class="s-dot ${dotClass}"></div><span>${s.start} – ${s.end}</span><span style="flex:1"></span><span style="font-family:'DM Mono',monospace">20 min</span>`;
+      row.innerHTML = `<div class="s-dot ${dotClass}"></div><span>${s.start} – ${s.end}</span><span style="flex:1"></span><span style="font-family:'DM Mono',monospace;font-size:12px">20 min</span>`;
       card.appendChild(row);
     });
 
@@ -1139,7 +1767,13 @@ function switchPage(name, btn) {
   document.getElementById('page-' + name).classList.add('active');
   btn.classList.add('active');
 
-  if (name === 'history') renderHistory();
+  if (name === 'history') {
+    calYear = new Date().getFullYear();
+    calMonth = new Date().getMonth();
+    statsYear = new Date().getFullYear();
+    statsMonth = new Date().getMonth();
+    renderBarChart();
+  }
   if (name === 'pdf') updatePdfStats();
   if (name === 'data') updateDataInfo();
 }
