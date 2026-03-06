@@ -375,7 +375,12 @@
     background: none;
     transition: color 0.2s;
   }
-  .nav-item.active { color: var(--blue); }
+  /* Individual active colors per tab */
+  .nav-item[data-nav="today"].active   { color: #f59e0b; }  /* Amber – Sonne/Heute */
+  .nav-item[data-nav="history"].active { color: #3b82f6; }  /* Blau – Verlauf */
+  .nav-item[data-nav="pdf"].active     { color: #ef4444; }  /* Rot – PDF */
+  .nav-item[data-nav="data"].active    { color: #10b981; }  /* Grün – Daten */
+  .nav-item[data-nav="settings"].active{ color: #8b5cf6; }  /* Lila – Einstellungen */
   .nav-icon { font-size: 20px; }
 
   /* ── TOAST ── */
@@ -559,24 +564,30 @@
   /* ── HISTORY TABS ── */
   .hist-tabs {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     padding: 12px 12px 0;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
-  .hist-tabs::-webkit-scrollbar { display: none; }
   .htab {
-    flex-shrink: 0;
+    flex: 1;
     background: var(--card);
     border: 1.5px solid var(--border);
-    border-radius: 20px;
-    padding: 7px 14px;
-    font-size: 12px;
+    border-radius: 16px;
+    padding: 10px 4px 8px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--muted);
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.1;
+  }
+  .htab-icon {
+    font-size: 22px;
+    line-height: 1;
   }
   .htab.active {
     background: var(--blue);
@@ -875,10 +886,10 @@
 
   <!-- Sub-Tabs -->
   <div class="hist-tabs">
-    <button class="htab active" onclick="switchHistTab('chart',this)">📈 Diagramm</button>
-    <button class="htab" onclick="switchHistTab('calendar',this)">📅 Kalender</button>
-    <button class="htab" onclick="switchHistTab('stats',this)">📊 Statistik</button>
-    <button class="htab" onclick="switchHistTab('log',this)">📋 Verlauf</button>
+    <button class="htab active" onclick="switchHistTab('chart',this)"><span class="htab-icon">📈</span>Diagramm</button>
+    <button class="htab" onclick="switchHistTab('calendar',this)"><span class="htab-icon">📅</span>Kalender</button>
+    <button class="htab" onclick="switchHistTab('stats',this)"><span class="htab-icon">📊</span>Statistik</button>
+    <button class="htab" onclick="switchHistTab('log',this)"><span class="htab-icon">📋</span>Verlauf</button>
   </div>
 
   <!-- TAB: CHART -->
@@ -1152,23 +1163,23 @@
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <button class="nav-item active" onclick="switchPage('today',this)">
+  <button class="nav-item active" data-nav="today" onclick="switchPage('today',this)">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
     Heute
   </button>
-  <button class="nav-item" onclick="switchPage('history',this)">
+  <button class="nav-item" data-nav="history" onclick="switchPage('history',this)">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     Verlauf
   </button>
-  <button class="nav-item" onclick="switchPage('pdf',this)">
+  <button class="nav-item" data-nav="pdf" onclick="switchPage('pdf',this)">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     PDF
   </button>
-  <button class="nav-item" onclick="switchPage('data',this)">
+  <button class="nav-item" data-nav="data" onclick="switchPage('data',this)">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
     Daten
   </button>
-  <button class="nav-item" onclick="switchPage('settings',this)">
+  <button class="nav-item" data-nav="settings" onclick="switchPage('settings',this)">
     <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     Einstellungen
   </button>
